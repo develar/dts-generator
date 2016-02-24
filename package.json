@@ -1,30 +1,32 @@
 {
-	"name": "dts-generator",
-	"description": ".d.ts generator. Generates a single d.ts bundle containing external modules from TypeScript files.",
-	"version": "1.7.0-pre",
-	"bugs": {
-		"url": "https://github.com/SitePen/dts-generator/issues"
-	},
-	"license": "BSD-3-Clause",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/SitePen/dts-generator.git"
-	},
-	"bin": {
-		"dts-generator": "bin/dts-generator"
-	},
-	"dependencies": {
-		"bluebird": "2.10.2",
-		"glob": "5.0.15",
-		"mkdirp": "0.5.1",
-		"typescript": "1.7.3"
-	},
-	"devDependencies": {
-		"tsd": "0.6.5",
-		"intern": "~3.0.0"
-	},
-	"scripts": {
-		"prepublish": "tsc --module commonjs --target es5 typings/tsd.d.ts index.ts bin/dts-generator.ts",
-		"test": "tests/run.sh"
-	}
+  "name": "tsd-generator",
+  "description": ".d.ts generator. Generates a single d.ts bundle containing external modules from TypeScript files.",
+  "version": "2.0.1",
+  "bugs": {
+    "url": "https://github.com/SitePen/dts-generator/issues"
+  },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SitePen/dts-generator.git"
+  },
+  "bin": {
+    "dts-generator": "bin/dts-generator"
+  },
+  "scripts": {
+    "compile": "tsconfig -i 2 && tsc",
+    "release": "npm run compile && npm publish",
+    "test": "tests/run.sh"
+  },
+  "dependencies": {
+    "bluebird": "3.3.1",
+    "mkdirp": "0.5.1"
+  },
+  "peerDependencies": {
+    "typescript": "^1.8.2"
+  },
+  "devDependencies": {
+    "intern": "~3.0.6",
+    "tsconfig-glob": "^0.4.1"
+  }
 }

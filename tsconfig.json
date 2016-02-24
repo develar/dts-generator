@@ -1,32 +1,27 @@
 {
-	"version": "1.7.3",
-	"compilerOptions": {
-		"target": "es5",
-		"module": "umd",
-		"declaration": false,
-		"noImplicitAny": true,
-		"moduleResolution": "node"
-	},
-	"filesGlob": [
-		"./*.ts",
-		"./bin/**/*.ts",
-		"./tests/**/*.ts",
-		"./typings/tsd.d.ts",
-		"./node_modules/typescript/lib/typescript.d.ts",
-		"./node_modules/typescript/lib/typescript.ts"
-	],
-	"files": [
-		"./index.ts",
-		"./bin/dts-generator.ts",
-		"./tests/intern.ts",
-		"./tests/support/foo/Bar.ts",
-		"./tests/support/foo/index.ts",
-		"./tests/typings/dts-generator/dts-generator.d.ts",
-		"./tests/unit/all.ts",
-		"./tests/unit/bin/dts-generator.ts",
-		"./tests/unit/index.ts",
-		"./typings/tsd.d.ts",
-		"./node_modules/typescript/lib/typescript.d.ts"
-	],
-	"exclude": []
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true
+  },
+  "filesGlob": [
+    "index.ts",
+    "bin/dts-generator.ts",
+    "typings/**/*.d.ts",
+    "!typings/browser/**/*.d.ts",
+    "!typings/browser.d.ts",
+    "!typings/main.d.ts",
+    "node_modules/typescript/lib/lib.es7.d.ts"
+  ],
+  "files": [
+    "typings/main/ambient/bluebird/bluebird.d.ts",
+    "typings/main/ambient/mkdirp/mkdirp.d.ts",
+    "typings/main/ambient/node/node.d.ts",
+    "node_modules/typescript/lib/lib.es7.d.ts",
+    "index.ts",
+    "bin/dts-generator.ts"
+  ]
 }
