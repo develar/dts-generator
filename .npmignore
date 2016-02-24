@@ -3,3 +3,8 @@
 typings/
 tsconfig.json
 tsd.json
+/.idea/
+/tests/
+tslint.json
+.travis.yml
+typings.json
