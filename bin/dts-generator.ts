@@ -35,7 +35,7 @@ export = function (argv: string[]): Promise<any> {
     }
 
     ['name', 'out'].forEach(function (key) {
-        if (!kwArgs[key]) {
+        if (!kwArgs[key] && key !== "name") {
             console.error(`Missing required argument "${key}"`);
             process.exit(1);
         }
