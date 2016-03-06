@@ -1,7 +1,7 @@
 {
   "name": "tsd-generator",
   "description": ".d.ts generator. Generates a single d.ts bundle containing external modules from TypeScript files.",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "bugs": {
     "url": "https://github.com/SitePen/dts-generator/issues"
   },
@@ -23,7 +23,7 @@
     "mkdirp": "0.5.1"
   },
   "peerDependencies": {
-    "typescript": "^1.8.7"
+    "typescript": "^1.8.7 || ^1.9.0-dev.0"
   },
   "devDependencies": {
     "intern": "~3.0.6",

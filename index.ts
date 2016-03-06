@@ -16,15 +16,11 @@ interface Options {
 
 const filenameToMid: (filename: string) => string = (function () {
   if (path.sep === '/') {
-    return function (filename: string) {
-      return filename;
-    };
+    return (it: string) => it
   }
   else {
     const separatorExpression = new RegExp(path.sep.replace('\\', '\\\\'), 'g');
-    return function (filename: string) {
-      return filename.replace(separatorExpression, '/');
-    };
+    return (it: string) => it.replace(separatorExpression, '/')
   }
 })();
 
@@ -67,6 +63,12 @@ function processTree(sourceFile: ts.SourceFile, replacer: (node: ts.Node) => str
 
     if (node.flags & ts.NodeFlags.Private) {
       // skip private nodes
+      skip(node)
+      return
+    }
+
+    if (node.kind === ts.SyntaxKind.ImportDeclaration && (<ts.ImportDeclaration>node).importClause == null) {
+      // ignore side effects only imports (like import "source-map-support/register")
       skip(node)
       return
     }
@@ -163,12 +165,15 @@ export default function generate(options: Options): Promise<void> {
     }
 
     let sourceModuleId: string
+    let baseName: string
     let name = declarationFile.fileName.slice(0, -5).replace(/\//g, '/').substring(compilerOptions.outDir.length + 1)
     if (options.name) {
+      baseName = options.name + '/' + relativeOutDir
       sourceModuleId = options.name + '/' + (name === "index" ? "" : relativeOutDir + '/' + name)
     }
     else {
       sourceModuleId = relativeOutDir
+      baseName = relativeOutDir
       if (name !== "index") {
         sourceModuleId += '/' + name
       }
@@ -190,7 +195,7 @@ export default function generate(options: Options): Promise<void> {
       else if (node.kind === ts.SyntaxKind.StringLiteral && (node.parent.kind === ts.SyntaxKind.ExportDeclaration || node.parent.kind === ts.SyntaxKind.ImportDeclaration)) {
         const text = (<ts.StringLiteralTypeNode> node).text;
         if (text.charAt(0) === '.') {
-          return ` '${filenameToMid(path.join(path.dirname(sourceModuleId), text))}'`;
+          return ` '${path.join(baseName, text)}'`;
         }
       }
     });
